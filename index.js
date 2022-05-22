@@ -1,8 +1,9 @@
-const alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+ const alphabet =  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,? ";
+"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const alph = Array.from(alphabet);
 "1234567890,. "
 
-const al = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,? ";
+// const al = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,? ";
 
 const sumPowersOfTwo = (num) => {
     let res = 0;
@@ -17,7 +18,11 @@ const encode = (srcPosition, alphabetPosition) => {
     const offset = alphabetPosition - 1;
     const twoPowerOfPosition = sumPowersOfTwo(srcPosition);
     const decodedAlphabetPosition = alphabetPosition * twoPowerOfPosition + 1 + offset;
-    return alphabet[decodedAlphabetPosition - 1];
+    let mod = (decodedAlphabetPosition - 1); // TODO: rename
+    if (mod >= alph.length)
+        mod = mod % alph.length - 1
+        //67 % alph.length - 1
+    return alphabet[mod];
 };
 
 const encodeStr = (str) => {
@@ -27,7 +32,7 @@ const encodeStr = (str) => {
         // if (i === 2)
             // debugger
         const ch = str[i];
-        const alphabetPosition = (alph.findIndex(x => x === ch) + 1) % 27;
+        const alphabetPosition = (alph.findIndex(x => x === ch) + 1);
         const srcPosition = i + 1;
         result += encode(srcPosition, alphabetPosition);
     }
@@ -40,13 +45,24 @@ const device = {
     encode: encodeStr
 };
 
-
-console.log (device.encode ('A'));
-console.log (device.encode ('B'));
-
-console.log ('abcdefghijklmnopqrstuvwxyz'.split ('').map (function (a) {
+const test1 = 'abcdefghijklmnopqrstuvwxyz'.split ('').map (function (a) {
   return device.encode (a) ;
-}).join ('')) 
+}).join ('');
+
+console.log (test1, test1 === "bdfhjlnprtvxzBDFHJLNPRTVXZ");
+
+console.log (device.encode ('A')) ;
+console.log (device.encode ('B')) ;
+console.log (device.encode ('C')) ;
+console.log (device.encode ('D')) ;
+console.log (device.encode ('E')) ;
+console.log (device.encode ('F')) ;
+console.log (device.encode ('G')) ;
+console.log (device.encode ('H')) ;
+console.log (device.encode ('I')) ;
+console.log (device.encode ('J')) ;
+console.log (device.encode ('K')) ;
+console.log (device.encode ('L')) ;
 
 
 // console.log (device.encode ('aa')) ;
@@ -76,4 +92,26 @@ console.log ('abcdefghijklmnopqrstuvwxyz'.split ('').map (function (a) {
 
 
 
-console.log(device.encode("The"))
+// console.log(device.encode("The"))
+
+
+
+
+
+
+// const pow = (number, power) => {
+//     if (power === 0)
+//         return 1;
+//     if (power === 1)
+//         return number;
+//     for (let i = 0; i < power; i++) {
+//         number = (number ** number) % 10
+//     }
+//     return number
+// }
+
+// console.log(pow(4, 0));
+// console.log(pow(4, 1));
+
+// console.log(pow(4, 2));
+// console.log(pow(9, 7));
