@@ -3,6 +3,28 @@
 const alph = Array.from(alphabet);
 "1234567890,. "
 
+const device = {}
+
+const dict = Array.from("bdhpF,82QsLirJejtNmzZKgnB3SwTyXG ?.6YIcflxVC5WE94UA1OoD70MkvRuPqHa");
+const lastIndex = dict.length - 1;
+
+device.decode = (str) => {
+    let res = "";
+
+    for (let i = 0; i < str.length; i++) {
+        const char = str[i];
+        if (dict.indexOf(char) > -1) {
+            res += char;
+            continue;
+        }
+        const ix = (dict.indexOf(char) + lastIndex - i) % dict.length;
+        if (!dict[ix]) debugger
+        res += dict[ix];
+    }
+    return res;
+}
+
+console.log(device.decode("bdhpF,82QsLirJejtNmzZKgnB3SwTyXG ?.6YIcflxVC5WE94UA1OoD70MkvRuPqHa"));
 // const al = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,? ";
 
 const sumPowersOfTwo = (num) => {
@@ -29,8 +51,7 @@ const encodeStr = (str) => {
     let result = "";
     for (let i = 0; i < str.length; i++) {
         // debugger
-        // if (i === 2)
-            // debugger
+        // if (i === 2) debugger
         const ch = str[i];
         const alphabetPosition = (alph.findIndex(x => x === ch) + 1);
         const srcPosition = i + 1;
@@ -41,9 +62,7 @@ const encodeStr = (str) => {
 };
 
 
-const device = {
-    encode: encodeStr
-};
+device.encode = encodeStr
 
 const test1 = 'abcdefghijklmnopqrstuvwxyz'.split ('').map (function (a) {
   return device.encode (a) ;
@@ -51,18 +70,18 @@ const test1 = 'abcdefghijklmnopqrstuvwxyz'.split ('').map (function (a) {
 
 console.log (test1, test1 === "bdfhjlnprtvxzBDFHJLNPRTVXZ");
 
-console.log (device.encode ('A')) ;
-console.log (device.encode ('B')) ;
-console.log (device.encode ('C')) ;
-console.log (device.encode ('D')) ;
-console.log (device.encode ('E')) ;
-console.log (device.encode ('F')) ;
-console.log (device.encode ('G')) ;
-console.log (device.encode ('H')) ;
-console.log (device.encode ('I')) ;
-console.log (device.encode ('J')) ;
-console.log (device.encode ('K')) ;
-console.log (device.encode ('L')) ;
+// console.log (device.encode ('AAAAA')) ;
+console.log (device.encode ('BBBBB')) ;
+// console.log (device.encode ('C')) ;
+// console.log (device.encode ('D')) ;
+// console.log (device.encode ('E')) ;
+// console.log (device.encode ('F')) ;
+// console.log (device.encode ('G')) ;
+// console.log (device.encode ('H')) ;
+// console.log (device.encode ('I')) ;
+// console.log (device.encode ('J')) ;
+// console.log (device.encode ('K')) ;
+// console.log (device.encode ('L')) ;
 
 
 // console.log (device.encode ('aa')) ;
