@@ -70,10 +70,10 @@ const test1 = "abcdefghijklmnopqrstuvwxyz".split ("").map (function (a) {
   return device.encode (a) ;
 }).join ("");
 
-console.log (test1, test1 === "bdfhjlnprtvxzBDFHJLNPRTVXZ");
+// console.log (test1, test1 === "bdfhjlnprtvxzBDFHJLNPRTVXZ");
 
 // console.log (device.encode ("AAAAA")) ;
-console.log (device.encode ("BBBBB")) ;
+// console.log (device.encode ("BBBBB")) ;
 // console.log (device.encode ("C")) ;
 // console.log (device.encode ("D")) ;
 // console.log (device.encode ("E")) ;
@@ -216,4 +216,59 @@ const decodeMorse = (input) => {
     return result;
 };
 
-console.log(decodeMorse(morse));
+// console.log(decodeMorse(morse));
+
+
+
+//----------------------------------------------------
+// 4 kuy Decode the Morse code, advanced
+// Code in binary format
+
+let bits = '1100110011001100000011000000111111001100111111001111110000000000000011001111110011111100111111000000110011001111110000001111110011001100000011';
+bits = "10001"
+//morse = ".... . -.--   .--- ..- -.. .";
+
+const decodeBits = (input) => {
+    console.log(input)
+    input = input.replace(/^0+|0+$/g, "");
+    return input.split("00000000000000")
+        .map(word => {
+            // debugger
+            return word.split("000000")
+                .map(letter => {
+                    return letter.split("00")
+                        .filter(x => x)
+                        .map(t => {
+                            if (t === "11")
+                                return "."
+                            if (t === "111111")
+                                return "-"
+                            else
+                                return "."
+                        })
+                        .join("")
+                })
+                .join(" ")
+        })
+    .join("   ");
+};
+
+
+
+
+console.log((decodeBits(bits)));
+console.log(decodeMorse(decodeBits(bits)));
+
+// const decodeBits = (input) => {
+//     input = input.replaceAll("00000000000000", "   ");
+//     input = input.replaceAll("000000", " ");
+//     return input.split(" ")
+//         .filter(x => x)
+//         .map(x => {
+//             return x.split("00")
+//                 .map(t => (t === "11") ? "." : "-")
+//                 .join("")
+//         });
+
+//     return input;
+// };
