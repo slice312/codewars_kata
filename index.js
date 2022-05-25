@@ -1,3 +1,13 @@
+class Salutation extends HTMLElement {
+    connectedCallback() {
+        this.innerHTML = `<h1>Hello World...</h1>`;
+        this.style.color = "red";
+    }
+}
+
+
+customElements.define('salutation-element', Salutation);
+
 // 3 kyu 
 
  const alphabet =  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.,? ";
@@ -225,7 +235,7 @@ const decodeMorse = (input) => {
 // Code in binary format
 
 let bits = '1100110011001100000011000000111111001100111111001111110000000000000011001111110011111100111111000000110011001111110000001111110011001100000011';
-bits = "10001"
+bits = "101"
 //morse = ".... . -.--   .--- ..- -.. .";
 
 const decodeBits = (input) => {
@@ -236,7 +246,7 @@ const decodeBits = (input) => {
             // debugger
             return word.split("000000")
                 .map(letter => {
-                    return letter.split("00")
+                    return letter.split(/0{1,}/)
                         .filter(x => x)
                         .map(t => {
                             if (t === "11")
