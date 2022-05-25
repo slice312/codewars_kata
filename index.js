@@ -235,7 +235,8 @@ const decodeMorse = (input) => {
 // Code in binary format
 
 let bits = '1100110011001100000011000000111111001100111111001111110000000000000011001111110011111100111111000000110011001111110000001111110011001100000011';
-bits = "101"
+bits = "10111"
+bits = "111"
 //morse = ".... . -.--   .--- ..- -.. .";
 
 const decodeBits = (input) => {
@@ -244,13 +245,15 @@ const decodeBits = (input) => {
     return input.split("00000000000000")
         .map(word => {
             // debugger
-            return word.split("000000")
+            return word.split(/0{3,6}/)
                 .map(letter => {
-                    return letter.split(/0{1,}/)
+                  return letter.split(/0{1,2}/)
                         .filter(x => x)
                         .map(t => {
                             if (t === "11")
                                 return "."
+                            if (t === "111")
+                                return "-"
                             if (t === "111111")
                                 return "-"
                             else
@@ -262,7 +265,6 @@ const decodeBits = (input) => {
         })
     .join("   ");
 };
-
 
 
 
